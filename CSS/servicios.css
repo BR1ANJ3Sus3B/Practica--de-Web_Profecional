@@ -1,0 +1,224 @@
+/* ===============================
+   VARIABLES
+================================ */
+:root {
+  --primary: #00695c;
+  --primary-dark: #004d40;
+  --primary-light: #b2dfdb;
+  --light: #f5f5f5;
+  --dark: #212121;
+  --gray: #757575;
+  --success: #4caf50;
+}
+
+/* ===============================
+   RESET + BODY
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+/* ===============================
+   HEADER + NAV (IGUAL A LOS DEMÁS)
+================================ */
+header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+}
+
+.logo small {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--primary-light);
+}
+
+/* ===============================
+   SECCIÓN SERVICIOS
+================================ */
+#servicios {
+  background: linear-gradient(135deg, #e0f2f1, #b2dfdb);
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.container h2 {
+  font-size: 2.8rem;
+  margin-bottom: 3rem;
+  color: var(--primary-dark);
+  position: relative;
+}
+
+.container h2::after {
+  content: '';
+  width: 100px;
+  height: 4px;
+  background: var(--primary);
+  display: block;
+  margin: 1rem auto 0;
+  border-radius: 3px;
+}
+
+/* ===============================
+   GRID SERVICIOS
+================================ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.5rem;
+}
+
+/* ===============================
+   CARD SERVICIO
+================================ */
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: all 0.35s;
+}
+
+.card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+}
+
+/* ICONO */
+.card i {
+  font-size: 4rem;
+  color: var(--primary);
+  margin-bottom: 1.2rem;
+}
+
+/* TEXTO */
+.card h3 {
+  font-size: 1.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.8rem;
+}
+
+.card p {
+  color: var(--gray);
+  font-size: 1.05rem;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+footer {
+  background: var(--primary-dark);
+  color: white;
+  text-align: center;
+  padding: 3rem 2rem;
+  margin-top: 5rem;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .container h2 {
+    font-size: 2.2rem;
+  }
+
+  .card {
+    padding: 2.2rem 1.5rem;
+  }
+}
+/* MIGAS DE PAN */
+.breadcrumbs {
+  background: #f4f6f8;
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+.breadcrumbs ul {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumbs li::after {
+  content: "›";
+  margin-left: 8px;
+  color: #aaa;
+}
+
+.breadcrumbs li:last-child::after {
+  content: "";
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+  color: #1e88e5;
+  font-weight: 600;
+}
+
+.breadcrumbs span {
+  color: #555;
+  font-weight: 500;
+}

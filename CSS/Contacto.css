@@ -1,0 +1,247 @@
+/* =========================
+   VARIABLES
+========================= */
+:root {
+  --primary: #00695c;
+  --primary-dark: #004d40;
+  --primary-light: #b2dfdb;
+  --light: #f5f5f5;
+  --dark: #212121;
+  --gray: #757575;
+  --success: #4caf50;
+}
+
+/* =========================
+   RESET
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+/* =========================
+   HEADER + NAV
+========================= */
+header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  box-shadow: 0 4px 20px rgba(0,0,0,.3);
+}
+
+nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.logo small {
+  font-size: .9rem;
+  opacity: .85;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+  color: var(--primary-light);
+}
+
+/* =========================
+   MIGAS DE PAN
+========================= */
+.breadcrumbs {
+  background: #f4f6f8;
+  padding: 12px 0;
+  font-size: 14px;
+}
+
+.breadcrumbs ul {
+  max-width: 1200px;
+  margin: 0; /* elimina centrado automático */
+  padding: 0 2rem;
+  list-style: none;
+  display: flex;
+  gap: 6px;
+  justify-content: flex-start; /* alineación a la izquierda */
+  align-items: center;
+}
+
+.breadcrumbs li {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbs li::after {
+  content: "›";
+  margin: 0 6px;
+  color: #aaa;
+}
+
+.breadcrumbs li:last-child::after {
+  content: "";
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+  color: #1e88e5;
+  font-weight: 500;
+}
+
+.breadcrumbs span {
+  color: var(--gray);
+}
+
+/* =========================
+   CONTACTO
+========================= */
+.contact-section {
+  min-height: calc(100vh - 220px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1rem;
+}
+
+.contact-card {
+  background: white;
+  width: 100%;
+  max-width: 520px;
+  padding: 3rem 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0,0,0,.15);
+  text-align: center;
+}
+
+/* =========================
+   TITULO
+========================= */
+.contact-card h2 {
+  font-size: 2.6rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.contact-card p {
+  color: var(--gray);
+  margin-bottom: 2.5rem;
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+.contact-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.contact-card input,
+.contact-card textarea {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+  font-size: 1rem;
+}
+
+.contact-card input:focus,
+.contact-card textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 10px rgba(0,105,92,.2);
+}
+
+/* =========================
+   BOTÓN
+========================= */
+.btn {
+  margin-top: 1rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: .9rem 2.5rem;
+  border-radius: 40px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: center;
+  transition: .3s;
+}
+
+.btn i {
+  margin-left: .4rem;
+}
+
+.btn:hover {
+  background: var(--success);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+  background: var(--primary-dark);
+  color: white;
+  text-align: center;
+  padding: 2.5rem 1rem;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-card {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .contact-card h2 {
+    font-size: 2.1rem;
+  }
+
+  /* Breadcrumb responsive */
+  .breadcrumbs ul {
+    padding: 0 1rem;
+    gap: 4px;
+  }
+}

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmacia del Ahorro Huauchinango | Medicamentos 24h | </title>
+  <meta name="description" content="Farmacia 24 horas en Huauchinango, Puebla. Entrega domicilio, inyecciones gratis. Tel: 771-719-0030">
+  <!-- Schema Local -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Pharmacy",
+    "name": "Farmacia del Ahorro Huauchinango",
+    "address": {"@type": "PostalAddress", "streetAddress": "Juárez 6, Centro", "addressLocality": "Huauchinango", "addressRegion": "Puebla", "postalCode": "73170"},
+    "telephone": "771-719-0030",
+    "openingHours": "Mo-Su 00:00-23:59"
+  }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #00695c; --primary-dark: #004d40; --light: #f5f5f5; --gray: #757575; --dark: #212121;
+      --success: #4caf50; --warning: #ff9800;
+    }
+    [data-theme="dark"] {
+      --light: #121212; --gray: #b0b0b0; --dark: #ffffff; --primary: #00bfa5;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--dark); background: var(--light); transition: all 0.3s; }
+    
+    /* HEADER + NAV */
+    header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+    nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .logo { font-size: 2rem; font-weight: bold; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; cursor: pointer; }
+    .nav-links a:hover, .nav-links a.active { color: #b2dfdb; }
+    .theme-toggle { background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem; border-radius: 50%; cursor: pointer; font-size: 1.2rem; }
+    
+    /* BREADCRUMB */
+    .breadcrumb { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; background: rgba(255,255,255,0.9); }
+    .breadcrumb a { color: var(--primary); text-decoration: none; }
+    .breadcrumb span { color: var(--gray); }
+    
+    /* HERO */
+    .hero { background: linear-gradient(rgba(0,105,92,0.8), rgba(0,77,64,0.8)), url('https://images.unsplash.com/photo-1587854691338-0b3c0e8f4e0e?ixlib=rb-4.0.3&fit=crop&w=1350&q=80') center/cover; color: white; text-align: center; padding: 8rem 2rem; animation: fadeIn 1s; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1rem; }
+    .btn { display: inline-block; background: white; color: var(--primary-dark); padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: bold; transition: all 0.3s; margin: 0.5rem; cursor: pointer; }
+    .btn:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+    .btn-success { background: var(--success); color: white; }
+    
+    /* SECCIONES GENERALES */
+    .container { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem; opacity: 0; transform: translateY(30px); transition: all 0.8s; }
+    .container.visible { opacity: 1; transform: translateY(0); }
+    h2 { text-align: center; color: var(--primary-dark); margin-bottom: 3rem; font-size: 2.8rem; position: relative; }
+    h2::after { content: ''; width: 100px; height: 5px; background: linear-gradient(var(--primary), var(--success)); position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); border-radius: 3px; }
+    
+    /* GRID PRODUCTOS/SERVICIOS */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
+    .card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1); transition: all 0.4s; position: relative; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary), var(--success)); opacity: 0; transition: opacity 0.3s; }
+    .card:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+    .card:hover::before { opacity: 1; }
+    .card img { width: 100%; height: 250px; object-fit: cover; }
+    .card-body { padding: 2rem; text-align: center; }
+    .card h3 { color: var(--primary-dark); margin-bottom: 1rem; }
+    .price { font-size: 1.5rem; font-weight: bold; color: var(--success); }
+    .cart-btn { background: var(--primary); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 25px; cursor: pointer; margin: 0.5rem; transition: all 0.3s; }
+    .cart-btn:hover { background: var(--success); transform: scale(1.05); }
+    
+    /* FORMULARIO CONTACTO */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 800px; margin: 2rem auto; }
+    @media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } }
+    input, textarea, select { width: 100%; padding: 1rem; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; transition: border 0.3s; }
+    input:focus, textarea:focus { outline: none; border-color: var(--primary); }
+    .submit-btn { grid-column: 1/-1; background: var(--primary); color: white; font-size: 1.2rem; }
+    
+    /* CARRITO MODAL */
+    .cart-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; }
+    .cart-content { background: white; margin: 5% auto; padding: 2rem; border-radius: 20px; max-width: 500px; max-height: 80vh; overflow-y: auto; }
+    .cart-item { display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid #eee; }
+    
+    /* SUCURSALES */
+    .sucursales { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
+    .sucursal-card i { font-size: 4rem; color: var(--primary); margin-bottom: 1.5rem; }
+    
+    /* FOOTER */
+    footer { background: var(--primary-dark); color: white; padding: 4rem 2rem 2rem; text-align: center; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto 2rem; }
+    .social a { color: white; font-size: 2rem; margin: 0 1rem; transition: color 0.3s; }
+    .social a:hover { color: var(--success); }
+    
+    /* RESPONSIVE + ANIM */
+    @media (max-width: 768px) { .nav-links { flex-direction: column; gap: 1rem; } nav { flex-direction: column; gap: 1rem; } .hero { padding: 4rem 1rem; } }
+    .hamburger { display: none; flex-direction: column; cursor: pointer; } @media (max-width: 768px) { .hamburger { display: flex; } .nav-links { display: none; } }
+  </style>
+</head>
+<body data-theme="light">
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <div class="logo">🏥 Farmacia del Ahorro <small>Huauchinango</small></div>
+      <ul class="nav-links">
+        <li><a data-page="home" class="active">🏠 Inicio</a></li>
+        <li><a data-page="productos">💊 Productos</a></li>
+        <li><a data-page="servicios">⚕️ Servicios</a></li>
+        <li><a data-page="sucursales">📍 Sucursales</a></li>
+        <li><a data-page="contacto">📞 Contacto</a></li>
+        <li><a id="cart-link"><i class="fas fa-shopping-cart"></i> (<span id="cart-count">0</span>)</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </nav>
+  </header>
+
+  <!-- BREADCRUMB DINÁMICO -->
+  <div class="breadcrumb" id="breadcrumb"><a href="#">Inicio</a> <i class="fas fa-chevron-right"></i> <span id="current-page">Página Actual</span></div>
+
+  <!-- HOME (Hero) -->
+  <section id="home" class="hero page-content" data-page="home">
+    <h1>🏥 Tu Farmacia 24h en Huauchinango</h1>
+    <p>Medicamentos genéricos, entrega GRATIS, inyecciones sin costo. <strong>Brian Jesus Mendoza Marquez</strong> recomienda: ¡Precios bajos como en tu DB `almacen24`!</p>
+    <div>
+      <a href="#productos" class="btn" data-page="productos">🛒 Ver Ofertas</a>
+      <a href="tel:7717190030" class="btn btn-success">📞 Llamar Ahora</a>
+    </div>
+  </section>
+
+ <!-- PRODUCTOS (de tu BD almacen24) -->
+<section id="productos" class="page-content" data-page="productos" style="display:none;">
+  <div class="container">
+    <h2>💊 Productos Destacados (Top de almacen24)</h2>
+    <div class="grid" id="productos-grid">
+
+      <!-- 1. Paracetamol -->
+      <div class="card" data-id="1" data-name="Paracetamol 500mg" data-price="8.50">
+        <img src="https://i.pinimg.com/1200x/31/39/f1/3139f1cd7df8b844d0a7a649e32f7b91.jpg" alt="Paracetamol 500mg">
+        <div class="card-body">
+          <h3>Paracetamol 500mg (Caja 20)</h3>
+          <p>Analgésico #1 en tb_articulos</p>
+          <div class="price">$8.50 <small>🥇 Más vendido</small></div>
+          <button class="cart-btn add-cart">🛒 Agregar</button>
+        </div>
+      </div>
+
+      <!-- 2. Vitamina C -->
+      <div class="card" data-id="2" data-name="Vitamina C 1000mg" data-price="15.00">
+        <img src="https://images.unsplash.com/photo-1580281780460-82d277b0e3f8?w=800&q=80" alt="Vitamina C 1000mg">
+        <div class="card-body">
+          <h3>Vitamina C 1000mg (60 tabs)</h3>
+          <p>Supradyn equivalente</p>
+          <div class="price">$15.00</div>
+          <button class="cart-btn add-cart">🛒 Agregar</button>
+        </div>
+      </div>
+
+      <!-- 3. Pañales Huggies -->
+      <div class="card" data-id="3" data-name="Pañales Huggies" data-price="250.00">
+        <img src="https://i.pinimg.com/1200x/34/51/ef/3451efcd461804ddf2820e0f70adcef4.jpg" alt="Pañales Huggies Talla 3">
+        <div class="card-body">
+          <h3>Pañales Huggies Talla 3</h3>
+          <p>Paquete 84 und</p>
+          <div class="price">$250.00</div>
+          <button class="cart-btn add-cart">🛒 Agregar</button>
+        </div>
+      </div>
+
+      <!-- 4. Ibuprofeno -->
+      <div class="card" data-id="4" data-name="Ibuprofeno" data-price="12.00">
+        <img src="https://i.pinimg.com/736x/7e/1a/11/7e1a11d05c46262ba9febacda81e8bf0.jpg" alt="Ibuprofeno 400mg">
+        <div class="card-body">
+          <h3>Ibuprofeno 400mg</h3>
+          <p>Antiinflamatorio</p>
+          <div class="price">$12.00</div>
+          <button class="cart-btn add-cart">🛒 Agregar</button>
+        </div>
+      </div>
+
+      <!-- 5. Omeprazol 20mg -->
+      <div class="card" data-id="5" data-name="Omeprazol 20mg" data-price="18.00">
+        <img src="https://i.pinimg.com/1200x/3f/51/38/3f51389b21865090edcab274f4b1e4bb.jpg" alt="Omeprazol 20mg">
+        <div class="card-body">
+          <h3>Omeprazol 20mg (Caja 14)</h3>
+          <p>Protector gástrico</p>
+          <div class="price">$18.00</div>
+          <button class="cart-btn add-cart">🛒 Agregar</button>
+        </div>
+      </div>
+
+      <!-- 6. Loratadina 10mg -->
+      <div class="card" data-id="6" data-name="Loratadina 10mg" data-price="9.90">
+        <img src="https://i.pinimg.com/1200x/4f/6f/36/4f6f36bdca467683aedcd9bc644e8824.jpg" alt="Loratadina 10mg">
+        <div class="card-body">
+          <h3>Loratadina 10mg (Caja 10)</h3>
+          <p>Antihistamínico para alergias</p>
+          <div class="price">$9.90</div>
+          <button class="cart-btn add-cart">🛒 Agregar</button>
+        </div>
+      </div>
+
+      <!-- 7. Crema Dental Colgate -->
+      <div class="card" data-id="7" data-name="Crema Dental Colgate" data-price="45.00">
+        <img src="https://i.pinimg.com/736x/fc/ef/c3/fcefc3292cf7cf881d3ba1ebd1511d88.jpg" alt="Crema Dental Colgate">
+        <div class="card-body">
+          <h3>Crema Dental Colgate Total (100ml)</h3>
+          <p>Cuidado bucal diario</p>
+          <div class="price">$45.00</div>
+          <button class="cart-btn add-cart">🛒 Agregar</button>
+        </div>
+      </div>
+
+      <!-- 8. Shampoo Head & Shoulders -->
+      <div class="card" data-id="8" data-name="Shampoo Head & Shoulders" data-price="89.00">
+        <img src="https://i.pinimg.com/1200x/2e/aa/79/2eaa7962069122cda2334e213491f042.jpg" alt="Shampoo Head & Shoulders">
+        <div class="card-body">
+          <h3>Shampoo Head & Shoulders (400ml)</h3>
+          <p>Control de caspa</p>
+          <div class="price">$89.00</div>
+          <button class="cart-btn add-cart">🛒 Agregar</button>
+        </div>
+      </div>
+
+      <!-- 9. Leche de Fórmula Similac -->
+      <div class="card" data-id="9" data-name="Leche Similac" data-price="380.00">
+        <img src="https://i.pinimg.com/736x/13/ea/23/13ea23064282685ea7e8d8d9ebb522dd.jpg" alt="Leche de Fórmula Similac">
+        <div class="card-body">
+          <h3>Leche de Fórmula Similac (900g)</h3>
+          <p>Para bebés de 0-6 meses</p>
+          <div class="price">$380.00</div>
+          <button class="cart-btn add-cart">🛒 Agregar</button>
+        </div>
+      </div>
+
+      <!-- 10. Complejo B -->
+      <div class="card" data-id="10" data-name="Complejo B" data-price="120.00">
+        <img src="https://i.pinimg.com/736x/4a/da/e3/4adae3d4a2335d6b1bdfe73ed769d4da.jpg" alt="Complejo B">
+        <div class="card-body">
+          <h3>Complejo B (60 tabletas)</h3>
+          <p>Vitaminas del grupo B</p>
+          <div class="price">$120.00</div>
+          <button class="cart-btn add-cart">🛒 Agregar</button>
+        </div>
+      </div>
+
+      <!-- 11. Toallitas Húmedas Huggies -->
+      <div class="card" data-id="11" data-name="Toallitas Húmedas" data-price="65.00">
+        <img src="https://i.pinimg.com/736x/dc/9c/84/dc9c84a3b2236746d996d8d15e05dcf1.jpg" alt="Toallitas Húmedas Huggies">
+        <div class="card-body">
+          <h3>Toallitas Húmedas Huggies (paquete 80)</h3>
+          <p>Cuidado del bebé</p>
+          <div class="price">$65.00</div>
+          <button class="cart-btn add-cart">🛒 Agregar</button>
+        </div>
+      </div>
+
+      <!-- 12. Alcohol en Gel 70% -->
+      <div class="card" data-id="12" data-name="Alcohol en Gel 70%" data-price="45.00">
+        <img src="https://i.pinimg.com/736x/5e/a5/66/5ea5669758c29afedeadb14c0ea363bf.jpg" alt="Alcohol en Gel 70%">
+        <div class="card-body">
+          <h3>Alcohol en Gel 70% (380ml)</h3>
+          <p>Desinfectante de manos</p>
+          <div class="price">$45.00</div>
+          <button class="cart-btn add-cart">🛒 Agregar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios" class="page-content" data-page="servicios" style="display:none; background: linear-gradient(135deg, #e0f2f1, #b2dfdb);">
+    <div class="container">
+      <h2>⚕️ Nuestros Servicios 24/7</h2>
+      <div class="grid">
+        <div class="card"><i class="fas fa-truck fa-4x" style="color:var(--primary);margin:2rem 0;display:block;"></i><div class="card-body"><h3>🚚 Entrega Domicilio GRATIS</h3><p>Huauchinango entero en <30min vía WhatsApp</p></div></div>
+        <div class="card"><i class="fas fa-syringe fa-4x" style="color:var(--success);margin:2rem 0;display:block;"></i><div class="card-body"><h3>💉 Inyecciones Gratis</h3><p>En todas sucursales (ver tb_articulos)</p></div></div>
+        <div class="card"><i class="fas fa-stethoscope fa-4x" style="color:var(--warning);margin:2rem 0;display:block;"></i><div class="card-body"><h3>👨‍⚕️ Consulta Médica</h3><p>$50 primera visita</p></div></div>
+        <div class="card"><i class="fas fa-download fa-4x" style="color:var(--primary);margin:2rem 0;display:block;"></i><div class="card-body"><h3>📥 Catálogo PDF</h3><p><a href="#404" class="btn" onclick="show404()">Descargar</a></p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUCURSALES -->
+  <section id="sucursales" class="page-content" data-page="sucursales" style="display:none;">
+    <div class="container">
+      <h2>📍 Sucursales en Huauchinango (de tu IP)</h2>
+      <div class="sucursales grid">
+        <div class="sucursal-card card"><i class="fas fa-map-marker-alt"></i><h3>Principal 24h</h3><p>Juárez 6 esq. Paseo Juárez<br>Tel: <a href="tel:7717190030">771-719-0030</a></p><p>🕐 24/7</p></div>
+        <div class="sucursal-card card"><i class="fas fa-map-marker-alt"></i><h3>Juárez Oriente</h3><p>Juárez 1 Oriente, Centro<br>Tel: <a href="tel:7717190222">771-719-0222</a></p><p>🕐 7am-11pm</p></div>
+        <div class="sucursal-card card"><i class="fas fa-map-marker-alt"></i><h3>Emergencias</h3><p>WhatsApp: <a href="https://wa.me/5217711234567">771-123-4567</a></p><p>📍 Cerca de UTXicotepec</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="page-content" data-page="contacto" style="display:none; background:#f8f9fa;">
+    <div class="container">
+      <h2>📞 Contacto Directo</h2>
+      <form id="contactForm" class="form-grid">
+        <input type="text" id="name" placeholder="Nombre (Brian Jesus Mendoza Marquez)" required>
+        <input type="tel" id="phone" placeholder="Tel/WhatsApp" required>
+        <input type="email" id="email" placeholder="Email">
+        <select id="service" required>
+          <option value="">Servicio</option>
+          <option>Entrega domicilio</option>
+          <option>Inyección</option>
+          <option>Consulta médica</option>
+          <option>Otro (Respaldos MySQL?)</option>
+        </select>
+        <textarea id="message" placeholder="Mensaje (ej: Respaldar almacen24)" rows="5"></textarea>
+        <button type="submit" class="btn submit-btn">🚀 Enviar a WhatsApp</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- CARRITO MODAL -->
+  <div class="cart-modal" id="cartModal">
+    <div class="cart-content">
+      <h3>🛒 Carrito (<span id="modal-count">0</span>)</h3>
+      <div id="cart-items"></div>
+      <div style="text-align:right;margin-top:1rem;">
+        <strong>Total: $<span id="cart-total">0</span></strong><br>
+        <button class="btn btn-success" onclick="checkout()">Pagar por WhatsApp</button>
+        <button class="btn" onclick="closeCart()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 404 SIMULADO (de tu pedido anterior) -->
+  <div id="404-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:3000;color:white;text-align:center;padding:5rem;">
+    <h1>❌ 404 - Catálogo No Disponible</h1>
+    <p>¡Pronto en producción! Usa backup MySQL: <code>C:\respaldos_mysql\almacen24_2026-01-19.sql</code></p>
+    <button class="btn" onclick="this.parentElement.style.display='none'" style="margin-top:2rem;">Cerrar</button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div><h3>🏥 Farmacia del Ahorro</h3><p>Tu salud #1 en Huauchinango | Respaldos automáticos daily</p></div>
+      <div><h3>📞 Contacto</h3><p>771-719-0030 | WA: 771-123-4567<br>Brian@localhost (tu user MySQL)</p></div>
+      <div><h3>🔗 Mapa del Sitio</h3><p>Inicio → Servicios → Productos → Sucursales → Contacto<br>Política Privacidad | Términos | 404</p></div>
+    </div>
+    <div class="social">
+      <a href="https://facebook.com"><i class="fab fa-facebook"></i></a>
+      <a href="https://instagram.com"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/5217711234567"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p style="opacity:0.8;margin-top:2rem;">© 2026 Brian Jesus Mendoza Marquez| UTXicotepec | Powered by xAI Grok</p>
+  </footer>
+
+  <script>
+    // 🎯 NAVEGACIÓN SPA + BREADCRUMB (como tu sitemap)
+    const pages = document.querySelectorAll('[data-page]');
+    document.querySelectorAll('[data-page]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetPage = link.dataset.page;
+        document.querySelectorAll('.page-content').forEach(p => p.style.display = 'none');
+        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+        document.getElementById(targetPage).style.display = 'block';
+        document.getElementById('current-page').textContent = link.textContent;
+        document.querySelector('.breadcrumb').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // 🌙 MODO OSCURO
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+      themeToggle.innerHTML = document.body.dataset.theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    });
+
+    // 🛒 CARRITO (de tu BD)
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    function updateCart() {
+      document.getElementById('cart-count').textContent = cart.length;
+      document.getElementById('modal-count').textContent = cart.length;
+      let total = cart.reduce((sum, item) => sum + item.price, 0);
+      document.getElementById('cart-total').textContent = total.toFixed(2);
+      const itemsHtml = cart.map(item => `<div class="cart-item"><span>${item.name}</span><span>$${item.price}</span><button onclick="removeFromCart('${item.id}')">❌</button></div>`).join('');
+      document.getElementById('cart-items').innerHTML = itemsHtml || '<p>Carrito vacío</p>';
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+    document.querySelectorAll('.add-cart').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.card');
+        cart.push({ id: card.dataset.id, name: card.dataset.name, price: parseFloat(card.dataset.price) });
+        updateCart();
+      });
+    });
+    function removeFromCart(id) { cart = cart.filter(item => item.id !== id); updateCart(); }
+    document.getElementById('cart-link').addEventListener('click', () => document.getElementById('cartModal').style.display = 'block');
+    function closeCart() { document.getElementById('cartModal').style.display = 'none'; }
+    function checkout() { alert(`¡Total $${document.getElementById('cart-total').textContent}! Enviado a WA 771-123-4567`); cart = []; updateCart(); closeCart(); }
+    updateCart();
+
+    // 📝 FORM CONTACTO (WhatsApp API)
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const phone = document.getElementById('phone').value;
+      const msg = `Hola! Soy ${document.getElementById('name').value}. Servicio: ${document.getElementById('service').value}. Mensaje: ${document.getElementById('message').value}`;
+      window.open(`https://wa.me/5217711234567?text=${encodeURIComponent(msg)}`, '_blank');
+    });
+
+    // 🎬 SCROLL ANIMATIONS
+    const observer = new IntersectionObserver(entries => entries.forEach(e => e.target.classList.toggle('visible', e.isIntersecting)));
+    document.querySelectorAll('.container').forEach(c => observer.observe(c));
+
+    // ❌ 404 SIMULADO (tu pedido)
+    function show404() { document.getElementById('404-modal').style.display = 'block'; }
+
+    // 🚀 INIT
+    document.getElementById('home').style.display = 'block'; // Home por default
+  </script>
+</body>
+</html>
