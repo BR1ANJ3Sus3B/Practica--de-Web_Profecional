@@ -269,5 +269,103 @@
   color: #555;
   font-weight: 500;
 }
+.search-filter-container {
+  display: flex;
+  gap: 10px; /* espacio entre input y select */
+  max-width: 600px; /* opcional para limitar ancho */
+  margin: 0 auto 2rem; /* centrar horizontalmente y margen inferior */
+  flex-wrap: wrap; /* para que en pantallas pequeñas se acomode */
+}
 
-  
+.search-filter-container input,
+.search-filter-container select {
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  border: 1.5px solid var(--primary);
+  border-radius: 30px;
+  outline: none;
+  flex: 1 1 0; /* para que crezcan igual y puedan reducirse */
+  min-width: 180px; /* evitar que se hagan demasiado pequeños */
+  transition: border-color 0.3s ease;
+  background: white;
+  color: #333;
+}
+
+.search-filter-container input:focus,
+.search-filter-container select:focus {
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 5px var(--primary-dark);
+}
+
+.search-filter-container select {
+  max-width: 220px;
+  cursor: pointer;
+  appearance: none; /* Quita estilo nativo en algunos navegadores para personalizar */
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill='%23333333' d='M0 0l5 6 5-6z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 10px 6px;
+  padding-right: 2.5rem; /* espacio para la flecha */
+}
+
+/* Opcional: que el input y select se ajusten en móvil */
+@media (max-width: 480px) {
+  .search-filter-container {
+    flex-direction: column;
+  }
+
+  .search-filter-container input,
+  .search-filter-container select {
+    max-width: 100%;
+    flex: 1 1 auto;
+  }
+}
+
+.search-filter-container {
+  display: flex;
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  align-items: center;
+}
+
+.search-filter-container input {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1.5px solid var(--primary);
+  border-radius: 8px; /* input con bordes más pequeños */
+  outline: none;
+  flex: 1 1 auto;
+  min-width: 150px;
+  transition: border-color 0.3s ease;
+  background: white;
+  color: #333;
+}
+
+.search-filter-container input:focus {
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 5px var(--primary-dark);
+}
+
+.search-filter-container select {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: 1.5px solid var(--primary);
+  border-radius: 40px; /* bordes grandes y redondeados */
+  outline: none;
+  max-width: 240px;
+  cursor: pointer;
+  background-color: white;
+  color: #333;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill='%23333333' d='M0 0l5 6 5-6z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  background-size: 10px 6px;
+  transition: border-color 0.3s ease;
+}
+
+.search-filter-container select:focus {
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 5px var(--primary-dark);
+}
