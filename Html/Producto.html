@@ -2,225 +2,366 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Productos | Farmacia del Ahorro Huauchinango</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- CSS -->
+  <title>Productos | Farmacia del Ahorro Huauchinango</title>
   <link rel="stylesheet" href="/CSS/producto.css">
 
   <style>
-    /* ===== BOTÓN CARRITO ===== */
-    .cart-float {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: #00695c;
-      color: white;
-      padding: 14px 18px;
-      border-radius: 50px;
-      font-size: 1.2rem;
-      cursor: pointer;
-      box-shadow: 0 8px 25px rgba(0,0,0,.3);
-      z-index: 2000;
-    }
-
-    .cart-float span {
-      background: red;
-      border-radius: 50%;
-      padding: 2px 8px;
-      font-size: 0.9rem;
-      margin-left: 6px;
-    }
-
-    /* ===== MODAL CARRITO ===== */
-    .cart-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.7);
-      z-index: 3000;
-    }
-
-    .cart-content {
-      background: white;
+    .search-box {
+      position: relative;
       max-width: 400px;
-      margin: 8% auto;
-      padding: 2rem;
-      border-radius: 16px;
+      margin-bottom: 1rem;
+    }
+
+    #searchInput {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .filters {
+      margin-bottom: 1rem;
+    }
+
+    .suggestions {
+      position: absolute;
+      background: #fff;
+      width: 100%;
+      border: 1px solid #ccc;
+      z-index: 10;
+    }
+
+    .suggestions div {
+      padding: 0.6rem;
+      cursor: pointer;
+    }
+
+    .suggestions div:hover {
+      background: #f1f1f1;
+    }
+
+    .no-results {
+      color: #c62828;
+      font-weight: bold;
+      margin: 1rem 0;
+      display: none;
     }
 
     .cart-item {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 1rem;
-      font-size: 0.95rem;
+      margin-bottom: .5rem;
     }
-
-    .cart-total {
-      font-weight: bold;
-      font-size: 1.2rem;
-      margin: 1.5rem 0;
-      color: #4caf50;
-    }
-
-    .btn-cart-pay {
-      background: #ff9800;
-      color: white;
-      border: none;
-      padding: 0.8rem 1.8rem;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-top: 1rem;
-      transition: 0.3s;
-      width: 100%;
-    }
-
-    .btn-cart-pay:hover {
-      background: #fb8c00;
-    }
-
   </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header>
   <nav>
     <div class="logo">🏥 Farmacia del Ahorro</div>
     <ul class="nav-links">
-       <li><a href="index.html">🏠 Inicio</a></li>
-      <li><a href="Producto.html">💊 Productos</a></li>
-      <li><a href="Servicios.html" class="active">⚕️ Servicios</a></li>
+      <li><a href="index.html">🏠 Inicio</a></li>
+      <li><a href="Producto.html" class="active">💊 Productos</a></li>
+      <li><a href="Servicios.html">⚕️ Servicios</a></li>
       <li><a href="Sucursales.html">📍 Sucursales</a></li>
       <li><a href="Contacto.html">📞 Contacto</a></li>
     </ul>
   </nav>
 </header>
 
-<!-- MIGAS DE PAN -->
-<nav class="breadcrumbs">
-  <ul>
-    <li><a href="/Html/Index.html">🏠 Inicio</a></li>
-    <li><span>💊 Productos</span></li>
-  </ul>
-</nav>
-
-<!-- PRODUCTOS -->
 <section class="container">
-  <h2>💊 Productos Destacados</h2>
+  <h2>🔍 Buscar productos</h2>
+
+  <!-- BUSCADOR -->
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Escribe lo que necesitas...">
+    <div class="suggestions" id="suggestions"></div>
+  </div>
+
+  <!-- FILTRO -->
+  <div class="filters">
+    <select id="categoryFilter">
+      <option value="all">Todas las categorías</option>
+      <option value="analgesico">Analgésicos</option>
+      <option value="vitaminas">Vitaminas</option>
+      <option value="higiene">Higiene</option>
+      <option value="digestivo">Digestivo</option>
+      <option value="otros">Otros</option>
+    </select>
+  </div>
+
+  <p class="no-results" id="noResults">❌ No se encontraron resultados</p>
 
   <div class="grid">
 
-    <!-- PRODUCTO 1 -->
-    <div class="card">
-      <img src="https://i.pinimg.com/1200x/31/39/f1/3139f1cd7df8b844d0a7a649e32f7b91.jpg">
+    <!-- ANALGÉSICOS -->
+    <div class="card" data-name="Paracetamol" data-category="analgesico">
+      <img src="https://i.pinimg.com/736x/31/39/f1/3139f1cd7df8b844d0a7a649e32f7b91.jpg">
       <div class="card-body">
-        <h3>Paracetamol 500mg</h3>
-        <p>Analgésico y antipirético.</p>
-        <p class="price">$8.50 MXN</p>
-        <button class="btn" onclick="addToCart('Paracetamol 500mg', 8.5)">🛒 Agregar</button>
+        <h3>Paracetamol 500 mg (20 tabs)</h3>
+        <p class="price">$8.50</p>
+        <button class="btn" onclick="addToCart('Paracetamol 500 mg',8.5)">Agregar</button>
       </div>
     </div>
 
-    <!-- PRODUCTO 2 -->
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1580281780460-82d277b0e3f8?w=800">
+    <div class="card" data-name="Ibuprofeno" data-category="analgesico">
+      <img src="https://i.pinimg.com/736x/df/73/c9/df73c9150045586c44f16c9653c9d10a.jpg">
       <div class="card-body">
-        <h3>Vitamina C 1000mg</h3>
-        <p>Refuerza defensas.</p>
-        <p class="price">$15.00 MXN</p>
-        <button class="btn" onclick="addToCart('Vitamina C 1000mg', 15)">🛒 Agregar</button>
+        <h3>Ibuprofeno 400 mg (10 tabs)</h3>
+        <p class="price">$12.00</p>
+        <button class="btn" onclick="addToCart('Ibuprofeno 400 mg',12)">Agregar</button>
       </div>
     </div>
 
-    <!-- PRODUCTO 3 -->
-    <div class="card">
-      <img src="https://i.pinimg.com/736x/7e/1a/11/7e1a11d05c46262ba9febacda81e8bf0.jpg">
+    <div class="card" data-name="Naproxeno" data-category="analgesico">
+      <img src="https://i.pinimg.com/736x/1f/cf/20/1fcf20d32fbcd445f20b115ab1ee44e2.jpg">
       <div class="card-body">
-        <h3>Ibuprofeno 400mg</h3>
-        <p>Antiinflamatorio.</p>
-        <p class="price">$12.00 MXN</p>
-        <button class="btn" onclick="addToCart('Ibuprofeno 400mg', 12)">🛒 Agregar</button>
+        <h3>Naproxeno 550 mg (10 tabs)</h3>
+        <p class="price">$28.00</p>
+        <button class="btn" onclick="addToCart('Naproxeno 550 mg',28)">Agregar</button>
+      </div>
+    </div>
+
+    <!-- VITAMINAS -->
+    <div class="card" data-name="Vitamina C" data-category="vitaminas">
+      <img src="https://i.pinimg.com/1200x/6d/5f/d2/6d5fd251d1beb13e5148c50b9ab668a2.jpg">
+      <div class="card-body">
+        <h3>Vitamina C 1 g (30 tabs)</h3>
+        <p class="price">$15.00</p>
+        <button class="btn" onclick="addToCart('Vitamina C 1 g',15)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card" data-name="Centrum Adultos" data-category="vitaminas">
+      <img src="https://i.pinimg.com/736x/79/16/59/7916596d867b13ab6bbee8371dbae49d.jpg">
+      <div class="card-body">
+        <h3>Centrum Adultos (30 tabs)</h3>
+        <p class="price">$189.00</p>
+        <button class="btn" onclick="addToCart('Centrum Adultos',189)">Agregar</button>
+      </div>
+    </div>
+
+    <!-- HIGIENE -->
+    <div class="card" data-name="Alcohol" data-category="higiene">
+      <img src="https://i.pinimg.com/1200x/db/78/bc/db78bc309f3a0c693fc39ce3fc35a16a.jpg">
+      <div class="card-body">
+        <h3>Alcohol 70% 500 ml</h3>
+        <p class="price">$18.00</p>
+        <button class="btn" onclick="addToCart('Alcohol 70%',18)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card" data-name="Jabón Antibacterial" data-category="higiene">
+      <img src="https://i.pinimg.com/1200x/59/be/50/59be50431a707473c7e8dc368c846e3a.jpg">
+      <div class="card-body">
+        <h3>Jabón Antibacterial 120 g</h3>
+        <p class="price">$9.50</p>
+        <button class="btn" onclick="addToCart('Jabón Antibacterial',9.5)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card" data-name="Gel Antibacterial" data-category="higiene">
+      <img src="https://i.pinimg.com/736x/f9/82/4e/f9824ebc4790c3151170c61271ed519a.jpg">
+      <div class="card-body">
+        <h3>Gel Antibacterial 300 ml</h3>
+        <p class="price">$35.00</p>
+        <button class="btn" onclick="addToCart('Gel Antibacterial 300 ml',35)">Agregar</button>
+      </div>
+    </div>
+
+    <!-- DIGESTIVO -->
+    <div class="card" data-name="Omeprazol" data-category="digestivo">
+      <img src="https://i.pinimg.com/736x/df/73/c9/df73c9150045586c44f16c9653c9d10a.jpg">
+      <div class="card-body">
+        <h3>Omeprazol 20 mg (14 caps)</h3>
+        <p class="price">$45.00</p>
+        <button class="btn" onclick="addToCart('Omeprazol 20 mg',45)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card" data-name="Loperamida" data-category="digestivo">
+      <img src="https://i.pinimg.com/736x/c6/19/49/c619496c907a9558d162d84839911684.jpg">
+      <div class="card-body">
+        <h3>Loperamida 2 mg (10 caps)</h3>
+        <p class="price">$22.00</p>
+        <button class="btn" onclick="addToCart('Loperamida 2 mg',22)">Agregar</button>
+      </div>
+    </div>
+
+    <!-- OTROS -->
+    <div class="card" data-name="Curitas" data-category="otros">
+      <img src="https://i.pinimg.com/736x/e6/80/24/e680240418773d31982785b61a16a2bc.jpg">
+      <div class="card-body">
+        <h3>Curitas surtidas (20 uds)</h3>
+        <p class="price">$10.00</p>
+        <button class="btn" onclick="addToCart('Curitas surtidas',10)">Agregar</button>
+      </div>
+    </div>
+
+    <div class="card" data-name="Termómetro Digital" data-category="otros">
+      <img src="https://i.pinimg.com/736x/93/85/01/93850154e720bda830f86ae6600c63e3.jpg">
+      <div class="card-body">
+        <h3>Termómetro Digital</h3>
+        <p class="price">$89.00</p>
+        <button class="btn" onclick="addToCart('Termómetro Digital',89)">Agregar</button>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- BOTÓN CARRITO -->
-<div class="cart-float" onclick="toggleCart()">
-  🛒 <span id="cart-count">0</span>
-</div>
+<!-- CARRITO -->
+<div class="cart-float" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
 
-<!-- MODAL CARRITO -->
 <div class="cart-modal" id="cartModal">
   <div class="cart-content">
-    <h3>🛒 Tu carrito</h3>
+    <h3>🛍️ Tu Carrito</h3>
     <div id="cart-items"></div>
-    <p class="cart-total">Total: $<span id="cart-total">0.00</span> MXN</p>
-    <button class="btn-cart-pay" onclick="checkout()">💳 Pagar</button>
+    <p>Total: $<span id="cart-total">0.00</span></p>
+    <button class="btn" onclick="checkout()">Pagar</button>
     <button class="btn" onclick="toggleCart()">Cerrar</button>
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
-  <p>© 2026 Farmacia del Ahorro Huauchinango</p>
+  © 2026 Farmacia del Ahorro Huauchinango • Av. Principal #123, Centro • Tel: (764) 123-4567
 </footer>
 
-<!-- JS CARRITO -->
 <script>
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+const searchInput = document.getElementById("searchInput");
+const categoryFilter = document.getElementById("categoryFilter");
+const suggestionsBox = document.getElementById("suggestions");
+const cards = document.querySelectorAll(".card");
+const noResults = document.getElementById("noResults");
+const items = [...cards].map(card => card.dataset.name);
+
+function saveCart() {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
 
 function addToCart(name, price) {
   cart.push({ name, price });
+  saveCart();
   updateCart();
 }
 
 function updateCart() {
-  const items = document.getElementById("cart-items");
-  const count = document.getElementById("cart-count");
-  const totalEl = document.getElementById("cart-total");
+  document.getElementById("cart-count").textContent = cart.length;
+  const itemsDiv = document.getElementById("cart-items");
+  const total = cart.reduce((s,i)=>s+i.price,0);
 
-  items.innerHTML = "";
-  let total = 0;
+  itemsDiv.innerHTML = cart.map((i,index)=>`
+    <div class="cart-item">
+      <span>${i.name} - $${i.price}</span>
+      <button onclick="removeFromCart(${index})">×</button>
+    </div>
+  `).join("");
 
-  cart.forEach(p => {
-    total += p.price;
-    items.innerHTML += `
-      <div class="cart-item">
-        <span>${p.name}</span>
-        <span>$${p.price.toFixed(2)}</span>
-      </div>
-    `;
-  });
-
-  count.textContent = cart.length;
-  totalEl.textContent = total.toFixed(2);
+  document.getElementById("cart-total").textContent = total.toFixed(2);
 }
 
-function toggleCart() {
+function removeFromCart(i){
+  cart.splice(i,1);
+  saveCart();
+  updateCart();
+}
+
+function toggleCart(){
   const modal = document.getElementById("cartModal");
-  modal.style.display = modal.style.display === "block" ? "none" : "block";
+  modal.style.display = modal.style.display==="flex"?"none":"flex";
 }
 
-// Función de pago
-function checkout() {
-  if(cart.length === 0) {
-    alert("Tu carrito está vacío 😅");
-    return;
-  }
-  let total = cart.reduce((sum, p) => sum + p.price, 0);
-  alert(`¡Gracias por tu compra! Total a pagar: $${total.toFixed(2)} MXN`);
-  cart = [];
+function checkout(){
+  alert("¡Gracias por tu compra! 🥳");
+  cart=[];
+  saveCart();
   updateCart();
   toggleCart();
 }
 
-// Inicializar carrito al cargar
+function filterAll(){
+  const text = searchInput.value.toLowerCase();
+  const category = categoryFilter.value;
+  let count = 0;
+
+  suggestionsBox.innerHTML = "";
+
+  items.filter(i=>i.toLowerCase().includes(text)).forEach(match=>{
+    const div=document.createElement("div");
+    div.textContent=match;
+    div.onclick=()=>{
+      searchInput.value=match;
+      filterAll();
+    };
+    suggestionsBox.appendChild(div);
+  });
+
+  cards.forEach(card=>{
+    const matchText = card.dataset.name.toLowerCase().includes(text);
+    const matchCat = category==="all" || card.dataset.category===category;
+    const show = matchText && matchCat;
+
+    card.style.display = show ? "block" : "none";
+    if(show) count++;
+  });
+
+  noResults.style.display = count===0 ? "block" : "none";
+}
+
+searchInput.addEventListener("input", filterAll);
+categoryFilter.addEventListener("change", filterAll);
+
 updateCart();
+function filterAll() {
+  const text = searchInput.value.toLowerCase();
+  const category = categoryFilter.value;
+  let count = 0;
+
+  suggestionsBox.innerHTML = "";
+
+  items.filter(i => i.toLowerCase().includes(text)).forEach(match => {
+    const div = document.createElement("div");
+    div.textContent = match;
+    div.onclick = () => {
+      searchInput.value = match;
+      filterAll();
+      suggestionsBox.innerHTML = "";
+    };
+    suggestionsBox.appendChild(div);
+  });
+
+  cards.forEach(card => {
+    const matchText = card.dataset.name.toLowerCase().includes(text);
+    const matchCat = category === "all" || card.dataset.category === category;
+    const show = matchText && matchCat;
+
+    card.style.display = show ? "block" : "none";
+    if(show) count++;
+  });
+
+  noResults.style.display = count === 0 ? "block" : "none";
+
+  // ✅ limpiar input si quieres:
+  // searchInput.value = "";
+}
+searchInput.addEventListener("input", filterAll);
+categoryFilter.addEventListener("change", filterAll);
+
+// Aquí agregar el listener para clic afuera
+document.addEventListener("click", (event) => {
+  const isClickInsideInput = searchInput.contains(event.target);
+  const isClickInsideSuggestions = suggestionsBox.contains(event.target);
+
+  if (!isClickInsideInput && !isClickInsideSuggestions) {
+    suggestionsBox.innerHTML = "";
+  }
+});
+
 </script>
 
 </body>
