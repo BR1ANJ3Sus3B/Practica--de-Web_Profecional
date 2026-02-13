@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar Sesión | Farmacia del Ahorro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/CSS/contacto.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <nav>
+    <div class="logo">🏥 Farmacia del Ahorro <small>Xicotepec
+        
+    </small></div>
+    <ul class="nav-links">
+      <li><a href="/Html/Index.html">🏠 Inicio</a></li>
+      <li><a href="/Html/Producto.html">💊 Productos</a></li>
+      <li><a href="/Html/Servicios.html">⚕️ Servicios</a></li>
+      <li><a href="/Html/Sucursales.html">📍 Sucursales</a></li>
+      <li><a href="/Html/login.html" class="active">🔐 Iniciar Sesión</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- MIGAS DE PAN -->
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ul>
+    <li><a href="/Html/Index.html">🏠 Inicio</a></li>
+    <li><span>🔐 Inicio de Sesión</span></li>
+  </ul>
+</nav>
+
+<!-- SECCIÓN FORMULARIO LOGIN -->
+<section class="contact-section">
+  <div class="contact-card">
+    <h2>🔐 Iniciar Sesión</h2>
+    <p>Ingrese su correo y contraseña para acceder a su cuenta.</p>
+
+    <form id="formLogin">
+
+      <input type="email" id="loginEmail" placeholder="Correo electrónico">
+      <small class="error" id="errorLoginEmail"></small>
+
+      <input type="password" id="loginPassword" placeholder="Contraseña">
+      <small class="error" id="errorLoginPassword"></small>
+
+      <div class="checkbox-container">
+        <input type="checkbox" id="loginRobotCheck">
+        <label for="loginRobotCheck">No soy un robot</label>
+      </div>
+      <small class="error" id="errorLoginRobot"></small>
+
+      <button type="submit" class="btn">
+        Entrar <i class="fas fa-right-to-bracket"></i>
+      </button>
+
+      <!-- SECCIÓN REGISTRAR -->
+      <div class="register-link">
+        <p>¿No tienes cuenta?</p>
+        <a href="/Html/Contacto.html" class="btn-register">
+          Registrarse <i class="fas fa-user-plus"></i>
+        </a>
+      </div>
+
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Brian Jesus Mendoza Marquez | Huauchinango</p>
+</footer>
+
+<script>
+// VALIDACIÓN FORMULARIO LOGIN
+document.getElementById("formLogin").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  let email = document.getElementById("loginEmail").value.trim();
+  let password = document.getElementById("loginPassword").value.trim();
+  let robotCheck = document.getElementById("loginRobotCheck").checked;
+  let valido = true;
+
+  document.querySelectorAll("#formLogin .error").forEach(el => el.textContent = "");
+
+  if (!/^[^@]+@[^@]+\.[a-zA-Z]{2,}$/.test(email)) {
+    document.getElementById("errorLoginEmail").textContent = "Ingrese un correo válido.";
+    valido = false;
+  }
+
+  if (password.length < 6) {
+    document.getElementById("errorLoginPassword").textContent = "La contraseña debe tener al menos 6 caracteres.";
+    valido = false;
+  }
+
+  if (!robotCheck) {
+    document.getElementById("errorLoginRobot").textContent = "Confirme que no es un robot.";
+    valido = false;
+  }
+
+  if (valido) {
+    alert("Inicio de sesión exitoso ✅");
+    document.getElementById("formLogin").reset();
+    // window.location.href = "dashboard.html";
+  }
+});
+</script>
+
+</body>
+</html>
