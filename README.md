@@ -202,3 +202,112 @@ Mejora la experiencia de usuario al localizar productos específicos sin recorre
 Error de búsqueda: No se encontraron coincidencias con los términos ingresados. Verifica que los datos sean correctos o intenta realizar la búsqueda utilizando otros criterios.
 
 ![Buscador de productos](/Assets/error.png)
+
+---
+
+### Unidad 2
+
+# Validación de Datos y Verificación de Usuarios Humanos
+En el desarrollo del sistema web para Farmacia del Ahorro – Huauchinango, se implementó un proceso de validación de datos en el formulario de inicio de sesión con el objetivo de garantizar la integridad de la información ingresada por el usuario y mejorar la seguridad del sistema.
+
+
+![Buscador de productos](/Assets/validacionHumana.png)
+
+## ¿Por qué implementar validaciones?
+
+Las validaciones se implementan por las siguientes razones:
+
+✔ Seguridad básica
+
+Evitan que se envíen datos vacíos, incorrectos o maliciosos.
+
+✔ Integridad de la información
+
+Garantizan que los datos ingresados cumplan con un formato lógico y coherente.
+
+✔ Mejora de experiencia del usuario
+
+Permiten mostrar mensajes claros e inmediatos sin recargar la página.
+
+✔ Prevención de errores humanos
+
+Muchos usuarios cometen errores de escritura; las validaciones ayudan a detectarlos antes de continuar.
+
+![Buscador de productos](/Assets/correo.png)
+
+## Pautas de Validación de Cada Campo y Justificación
+🔹 Campo: Correo Electrónico
+🔍 Pauta de validación:
+
+Se utiliza una expresión regular: 
+Es una secuencia de caracteres que forma un patrón de búsqueda para validar, localizar o manipular texto
+
+ como correos electrónicos, números de teléfono o contraseñas
+
+/^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
+
+✔ ¿Qué valida?
+
+- Que exista texto antes del “@”.
+
+- Que exista un dominio después del “@”.
+
+- Que tenga una extensión válida (mínimo 2 letras).
+
+![Buscador de productos](/Assets/validacion%20.png)
+
+## Campo: Contraseña
+🔍 Pauta de validación:
+
+Mínimo 8 caracteres y una letra Mayuscula .
+
+if (password.length < 8)
+
+![Buscador de productos](/Assets/Contra.png) 
+ 
+---
+
+![Buscador de productos](/Assets/Mayus.png) 
+
+
+## Campo: Checkbox "No soy un robot"
+🔍 Pauta de validación:
+
+Se verifica que esté marcado:
+
+if (!robotCheck)
+
+![Buscador de productos](/Assets/robot.png)
+
+### ¿Por qué se eligió este tipo de verificación?
+
+- Se implementó un captcha simple tipo checkbox porque:
+
+- Es fácil de implementar.
+
+- No requiere conexión con servicios externos.
+
+- Es ideal para fines académicos.
+
+- Demuestra el concepto de validación humana.
+
+- No depende de APIs como Google reCAPTCHA.
+
+
+### ¿Por qué no se utilizó un reCAPTCHA real?
+
+- Un sistema como Google reCAPTCHA requiere:
+
+- Registro en Google Cloud
+
+- Claves públicas y privadas
+
+- configuración en backend
+
+- Validación del lado del servidor
+
+Dado que el proyecto está desarrollado solo en frontend (HTML, CSS y JavaScript), se eligió una solución simple que cumple el propósito demostrativo sin necesidad de infraestructura adicional.
+
+###  En Conclusión
+
+La implementación de validaciones en el formulario de inicio de sesión cumple un papel fundamental en la calidad y seguridad del sistema. Cada campo fue validado bajo criterios básicos pero funcionales, equilibrando seguridad, simplicidad y usabilidad.

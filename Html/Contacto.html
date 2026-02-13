@@ -2,56 +2,178 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Contacto | Farmacia del Ahorro</title>
+  <title>Registrar | Farmacia del Ahorro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/CSS/contacto.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
   <nav>
     <div class="logo">🏥 Farmacia del Ahorro <small>Huauchinango</small></div>
-    <ul class="nav-links">
-      <li><a href="index.html">🏠 Inicio</a></li>
-      <li><a href="Producto.html">💊 Productos</a></li>
-      <li><a href="Servicios.html">⚕️ Servicios</a></li>
-      <li><a href="Sucursales.html">📍 Sucursales</a></li>
-      <li><a href="Contacto.html" class="active">📞 Contacto</a></li>
-    </ul>
   </nav>
 </header>
 
-<!-- MIGAS DE PAN -->
-<nav class="breadcrumbs" aria-label="Breadcrumb">
+<nav class="breadcrumbs">
   <ul>
-    <li><a href="index.html">🏠 Inicio</a></li>
-    <li><span>📞 Contacto</span></li>
+    <li><a href="/Html/Index.html">🏠 Inicio</a></li>
+    <li><span>📝 Registrar</span></li>
   </ul>
 </nav>
 
-<!-- SECCIÓN CONTACTO -->
 <section class="contact-section">
   <div class="contact-card">
-    <h2>📞 Contáctanos</h2>
-    <p>Estamos disponibles 24/7. ¡Envíanos un mensaje y responderemos rápidamente!</p>
+    <h2>📝 Registrar</h2>
+    <p>Complete el siguiente formulario para crear su cuenta.</p>
 
-    <form>
-      <input type="text" placeholder="Nombre completo" required>
-      <input type="tel" placeholder="WhatsApp / Teléfono" required>
-      <textarea placeholder="Mensaje" rows="5" required></textarea>
+    <form id="formPaciente">
+
+      <input type="text" id="nombre" placeholder="Nombre completo">
+      <small class="error" id="errorNombre"></small>
+
+      <input type="number" id="edad" placeholder="Edad">
+      <small class="error" id="errorEdad"></small>
+
+      <input type="email" id="email" placeholder="Correo electrónico">
+      <small class="error" id="errorEmail"></small>
+
+      <!-- CONTRASEÑA -->
+      <div style="position:relative;">
+        <input type="password" id="password" placeholder="Contraseña">
+        <i class="fas fa-eye" id="togglePassword"
+           style="position:absolute; right:10px; top:12px; cursor:pointer;"></i>
+      </div>
+      <small class="error" id="errorPassword"></small>
+
+      <!-- CONFIRMAR CONTRASEÑA -->
+      <div style="position:relative;">
+        <input type="password" id="confirmPassword" placeholder="Confirmar contraseña">
+        <i class="fas fa-eye" id="toggleConfirm"
+           style="position:absolute; right:10px; top:12px; cursor:pointer;"></i>
+      </div>
+      <small class="error" id="errorConfirm"></small>
+
+      <div class="checkbox-container">
+        <input type="checkbox" id="robotCheck">
+        <label for="robotCheck">No soy un robot</label>
+      </div>
+      <small class="error" id="errorRobot"></small>
+
       <button type="submit" class="btn">
-        Enviar <i class="fas fa-paper-plane"></i>
+        Registrar <i class="fas fa-user-check"></i>
       </button>
+
     </form>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <p>© 2026 Brian Jesus Mendoza Marquez | Huauchinango</p>
 </footer>
+
+<script>
+document.getElementById("formPaciente").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  let nombre = document.getElementById("nombre").value.trim();
+  let edad = document.getElementById("edad").value.trim();
+  let email = document.getElementById("email").value.trim();
+  let password = document.getElementById("password").value.trim();
+  let confirmPassword = document.getElementById("confirmPassword").value.trim();
+  let robotCheck = document.getElementById("robotCheck").checked;
+  let valido = true;
+
+  document.querySelectorAll(".error").forEach(el => el.textContent = "");
+
+  // VALIDACIÓN NOMBRE
+  if (nombre.length < 3) {
+    document.getElementById("errorNombre").textContent =
+      "El nombre debe tener al menos 3 caracteres.";
+    valido = false;
+  }
+
+  // VALIDACIÓN EDAD
+  if (edad < 18 || edad > 100 || edad === "") {
+    document.getElementById("errorEdad").textContent =
+      "La edad debe estar entre 18 y 100 años.";
+    valido = false;
+  }
+
+  // VALIDACIÓN EMAIL
+  if (!/^[^@]+@[^@]+\.[a-zA-Z]{2,}$/.test(email)) {
+    document.getElementById("errorEmail").textContent =
+      "Ingrese un correo electrónico válido.";
+    valido = false;
+  }
+
+  // VALIDACIÓN CONTRASEÑA SEGURA
+  if (password === "") {
+    document.getElementById("errorPassword").textContent =
+      "La contraseña es obligatoria.";
+    valido = false;
+
+  } else if (password.length < 8) {
+    document.getElementById("errorPassword").textContent =
+      "Debe tener mínimo 8 caracteres.";
+    valido = false;
+
+  } else if (!/[A-Z]/.test(password)) {
+    document.getElementById("errorPassword").textContent =
+      "Debe incluir al menos una letra mayúscula.";
+    valido = false;
+
+  } else if (!/[a-z]/.test(password)) {
+    document.getElementById("errorPassword").textContent =
+      "Debe incluir al menos una letra minúscula.";
+    valido = false;
+
+  } else if (!/[0-9]/.test(password)) {
+    document.getElementById("errorPassword").textContent =
+      "Debe incluir al menos un número.";
+    valido = false;
+
+  } else if (!/[!@#$%^&*(),.?\":{}|<>]/.test(password)) {
+    document.getElementById("errorPassword").textContent =
+      "Debe incluir al menos un carácter especial.";
+    valido = false;
+  }
+
+  // VALIDACIÓN CONFIRMAR CONTRASEÑA
+  if (confirmPassword !== password) {
+    document.getElementById("errorConfirm").textContent =
+      "Las contraseñas no coinciden.";
+    valido = false;
+  }
+
+  // VALIDACIÓN ROBOT
+  if (!robotCheck) {
+    document.getElementById("errorRobot").textContent =
+      "Confirme que no es un robot.";
+    valido = false;
+  }
+
+  if (valido) {
+    alert("Registro completado correctamente ✅");
+    document.getElementById("formPaciente").reset();
+
+    setTimeout(() => {
+      window.location.href = "/Html/login.html";
+    }, 1000);
+  }
+});
+
+// MOSTRAR / OCULTAR CONTRASEÑA
+document.getElementById("togglePassword").addEventListener("click", function() {
+  let input = document.getElementById("password");
+  input.type = input.type === "password" ? "text" : "password";
+});
+
+document.getElementById("toggleConfirm").addEventListener("click", function() {
+  let input = document.getElementById("confirmPassword");
+  input.type = input.type === "password" ? "text" : "password";
+});
+</script>
 
 </body>
 </html>
